@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vaahis Pet World — Where Pets Come First 🐾</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset & Base ─────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      color: #333;
+      background: #fefcf8;
+      overflow-x: hidden;
+    }
+    h1,h2,h3,h4 { font-family: 'Fredoka', sans-serif; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ─── Utility ──────────────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section-title {
+      text-align: center;
+      font-size: 2.6rem;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #ff6b6b, #f0a500, #48c774);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .section-subtitle {
+      text-align: center;
+      font-size: 1.15rem;
+      color: #777;
+      margin-bottom: 48px;
+      max-width: 650px;
+      margin-left: auto; margin-right: auto;
+    }
+
+    /* ─── Navbar ────────────────────────────────────── */
+    .navbar {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+      transition: background 0.3s;
+    }
+    .navbar .container {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px;
+    }
+    .logo {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.6rem; font-weight: 700;
+      background: linear-gradient(135deg, #ff6b6b, #e05dbc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .logo span { font-size: 1.3rem; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      font-weight: 600; font-size: 0.95rem; color: #555;
+      transition: color 0.3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 3px; border-radius: 2px;
+      background: linear-gradient(90deg, #ff6b6b, #f0a500);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover { color: #ff6b6b; }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      background: linear-gradient(135deg, #ff6b6b, #f0a500);
+      color: #fff !important; padding: 10px 24px; border-radius: 50px;
+      font-weight: 700; transition: transform 0.2s, box-shadow 0.3s;
+    }
+    .nav-cta:hover { transform: scale(1.05); box-shadow: 0 6px 24px rgba(255,107,107,0.35); }
+    .nav-cta::after { display: none !important; }
+    .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+    .hamburger span { width: 28px; height: 3px; background: #555; border-radius: 2px; transition: 0.3s; }
+
+    /* ─── Hero ──────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      background: linear-gradient(160deg, #fff5e8 0%, #ffe0f0 35%, #e0f0ff 70%, #e8ffe0 100%);
+      position: relative; overflow: hidden;
+      padding-top: 72px;
+    }
+    .hero-bg-shapes {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+    }
+    .hero-bg-shapes .shape {
+      position: absolute; border-radius: 50%; opacity: 0.12;
+      animation: float 8s ease-in-out infinite;
+    }
+    .hero-bg-shapes .shape:nth-child(1) { width: 400px; height: 400px; background: #ff6b6b; top: -100px; right: -80px; animation-delay: 0s; }
+    .hero-bg-shapes .shape:nth-child(2) { width: 300px; height: 300px; background: #48c774; bottom: -60px; left: -60px; animation-delay: 2s; }
+    .hero-bg-shapes .shape:nth-child(3) { width: 200px; height: 200px; background: #f0a500; top: 40%; left: 50%; animation-delay: 4s; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.05); }
+    }
+    .hero .container {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+      position: relative; z-index: 2;
+    }
+    .hero-text h1 {
+      font-size: 3.4rem; line-height: 1.15; margin-bottom: 20px;
+      color: #2d2d2d;
+    }
+    .hero-text h1 .highlight {
+      background: linear-gradient(135deg, #ff6b6b, #f0a500);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-text p {
+      font-size: 1.2rem; color: #666; margin-bottom: 32px; line-height: 1.7;
+    }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: linear-gradient(135deg, #ff6b6b, #f0a500);
+      color: #fff; padding: 14px 36px; border-radius: 50px;
+      font-weight: 700; font-size: 1.05rem; border: none; cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.3s;
+      font-family: 'Nunito', sans-serif;
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(255,107,107,0.35); }
+    .btn-secondary {
+      background: #fff; color: #ff6b6b; padding: 14px 36px;
+      border-radius: 50px; font-weight: 700; font-size: 1.05rem;
+      border: 2px solid #ff6b6b; cursor: pointer;
+      transition: all 0.3s; font-family: 'Nunito', sans-serif;
+    }
+    .btn-secondary:hover { background: #ff6b6b; color: #fff; }
+    .hero-image { position: relative; }
+    .hero-image img {
+      width: 100%; border-radius: 30px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+      animation: heroFloat 6s ease-in-out infinite;
+    }
+    @keyframes heroFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-16px); }
+    }
+    .hero-badge {
+      position: absolute; padding: 12px 20px; border-radius: 16px;
+      background: #fff; box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      font-weight: 700; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;
+      animation: badgePop 4s ease-in-out infinite;
+    }
+    .hero-badge.b1 { top: 10%; left: -30px; }
+    .hero-badge.b2 { bottom: 15%; right: -20px; animation-delay: 2s; }
+    .hero-badge .emoji { font-size: 1.5rem; }
+    @keyframes badgePop {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    /* ─── Floating Paw Prints ──────────────────────── */
+    .paw-trail {
+      position: fixed; pointer-events: none; z-index: 9999;
+      font-size: 1.4rem; opacity: 0;
+      animation: pawFade 1.2s ease-out forwards;
+    }
+    @keyframes pawFade {
+      0% { opacity: 0.7; transform: scale(1) rotate(0deg); }
+      100% { opacity: 0; transform: scale(0.3) rotate(40deg) translateY(-30px); }
+    }
+
+    /* ─── Services / Features ──────────────────────── */
+    .services { padding: 100px 0; background: #fff; }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+    }
+    .service-card {
+      background: linear-gradient(145deg, #fff, #fef9f0);
+      border-radius: 28px; padding: 40px 32px;
+      text-align: center; position: relative; overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.04);
+      transition: transform 0.35s, box-shadow 0.35s;
+      cursor: pointer;
+    }
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 100%; height: 5px;
+      background: linear-gradient(90deg, var(--card-accent, #ff6b6b), var(--card-accent2, #f0a500));
+    }
+    .service-card .icon {
+      font-size: 3rem; margin-bottom: 20px;
+      display: inline-block;
+      animation: iconBounce 2s ease-in-out infinite;
+    }
+    @keyframes iconBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .service-card h3 { font-size: 1.35rem; margin-bottom: 12px; color: #2d2d2d; }
+    .service-card p { color: #777; line-height: 1.7; font-size: 0.95rem; }
+
+    /* ─── Products ─────────────────────────────────── */
+    .products { padding: 100px 0; background: linear-gradient(180deg, #fef9f0, #fff5f5); }
+    .filter-tabs {
+      display: flex; justify-content: center; gap: 12px; margin-bottom: 48px; flex-wrap: wrap;
+    }
+    .filter-tab {
+      padding: 10px 28px; border-radius: 50px; border: 2px solid #ddd;
+      background: #fff; font-weight: 600; cursor: pointer;
+      transition: all 0.3s; font-family: 'Nunito', sans-serif; font-size: 0.95rem;
+    }
+    .filter-tab.active, .filter-tab:hover {
+      border-color: #ff6b6b; background: #ff6b6b; color: #fff;
+    }
+    .products-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 28px;
+    }
+    .product-card {
+      background: #fff; border-radius: 24px; overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      position: relative;
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+    }
+    .product-card .badge-tag {
+      position: absolute; top: 16px; left: 16px;
+      background: linear-gradient(135deg, #48c774, #36b36a);
+      color: #fff; padding: 4px 14px; border-radius: 50px;
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+    }
+    .product-card .wishlist-btn {
+      position: absolute; top: 16px; right: 16px;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.9); border: none;
+      font-size: 1.2rem; cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      transition: all 0.3s; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .product-card .wishlist-btn:hover,
+    .product-card .wishlist-btn.liked {
+      background: #ff6b6b; color: #fff; transform: scale(1.15);
+    }
+    .product-img {
+      height: 220px; overflow: hidden;
+      background: linear-gradient(135deg, #f8f4ef, #fef0e0);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+      border-radius: 20px 20px 0 0;
+    }
+    .product-img img {
+      max-height: 180px; object-fit: contain;
+      transition: transform 0.4s;
+    }
+    .product-card:hover .product-img img { transform: scale(1.1); }
+    .product-info { padding: 20px; }
+    .product-info .brand { font-size: 0.8rem; text-transform: uppercase; color: #aaa; font-weight: 700; letter-spacing: 1px; }
+    .product-info h4 { font-size: 1.1rem; margin: 6px 0 4px; color: #2d2d2d; }
+    .product-info .qty { font-size: 0.85rem; color: #999; }
+    .product-info .price-row {
+      display: flex; align-items: center; justify-content: space-between; margin-top: 14px;
+    }
+    .product-info .price {
+      font-size: 1.3rem; font-weight: 800;
+      background: linear-gradient(135deg, #ff6b6b, #e0457b);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .product-info .add-cart {
+      background: linear-gradient(135deg, #ff6b6b, #f0a500);
+      color: #fff; border: none; padding: 8px 20px; border-radius: 50px;
+      font-weight: 700; cursor: pointer; font-size: 0.85rem;
+      transition: transform 0.2s, box-shadow 0.3s;
+      font-family: 'Nunito', sans-serif;
+    }
+    .product-info .add-cart:hover {
+      transform: scale(1.08);
+      box-shadow: 0 4px 16px rgba(255,107,107,0.3);
+    }
+
+    /* ─── Pet Quiz ─────────────────────────────────── */
+    .quiz-section {
+      padding: 100px 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff; text-align: center;
+    }
+    .quiz-section .section-title {
+      background: linear-gradient(135deg, #fff, #ffd6e0);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .quiz-section .section-subtitle { color: rgba(255,255,255,0.75); }
+    .quiz-box {
+      max-width: 600px; margin: 0 auto;
+      background: rgba(255,255,255,0.12); backdrop-filter: blur(10px);
+      border-radius: 24px; padding: 40px 36px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .quiz-question { font-size: 1.3rem; font-weight: 700; margin-bottom: 28px; }
+    .quiz-options { display: flex; flex-direction: column; gap: 14px; }
+    .quiz-option {
+      background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.25);
+      padding: 16px 24px; border-radius: 20px; cursor: pointer;
+      font-weight: 600; font-size: 1rem; transition: all 0.3s;
+      text-align: left; color: #fff;
+      font-family: 'Nunito', sans-serif;
+    }
+    .quiz-option:hover { background: rgba(255,255,255,0.25); border-color: #fff; transform: translateX(6px); }
+    .quiz-option.selected { background: rgba(255,255,255,0.35); border-color: #ffd700; }
+    .quiz-result {
+      margin-top: 24px; font-size: 1.2rem; font-weight: 700;
+      padding: 20px; border-radius: 20px;
+      background: rgba(255,255,255,0.18);
+      display: none;
+    }
+    .quiz-result.show { display: block; animation: fadeUp 0.5s ease; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Pet Wash ─────────────────────────────────── */
+    .pet-wash {
+      padding: 100px 0;
+      background: linear-gradient(135deg, #e0f7fa, #f3e5f5);
+    }
+    .wash-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .wash-image img {
+      border-radius: 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+    }
+    .wash-content h2 {
+      font-size: 2.2rem; margin-bottom: 20px;
+      background: linear-gradient(135deg, #00bcd4, #9c27b0);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .wash-content p { color: #666; line-height: 1.8; margin-bottom: 16px; font-size: 1.05rem; }
+    .wash-features { list-style: none; margin: 24px 0; }
+    .wash-features li {
+      padding: 10px 0; font-weight: 600; color: #555;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .wash-features li::before { content: '✨'; font-size: 1.2rem; }
+
+    /* ─── Pet Doctor ───────────────────────────────── */
+    .pet-doctor {
+      padding: 100px 0;
+      background: linear-gradient(135deg, #e8f5e9, #fff8e1);
+    }
+    .doctor-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .doctor-content h2 {
+      font-size: 2.2rem; margin-bottom: 20px;
+      background: linear-gradient(135deg, #4caf50, #ff9800);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .doctor-content p { color: #666; line-height: 1.8; margin-bottom: 16px; font-size: 1.05rem; }
+    .doctor-schedule {
+      background: #fff; border-radius: 20px; padding: 24px; margin-top: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      display: flex; gap: 24px; flex-wrap: wrap;
+    }
+    .schedule-item { display: flex; align-items: center; gap: 10px; }
+    .schedule-item .emoji { font-size: 1.5rem; }
+    .schedule-item .info { font-weight: 600; color: #555; }
+    .schedule-item .info small { display: block; font-weight: 400; color: #999; }
+    .doctor-image img {
+      border-radius: 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+    }
+
+    /* ─── About ─────────────────────────────────────── */
+    .about { padding: 100px 0; background: #fff; }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .about-image img {
+      border-radius: 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+    }
+    .about-content h2 {
+      font-size: 2.2rem; margin-bottom: 20px;
+      background: linear-gradient(135deg, #ff6b6b, #f0a500);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .about-content p { color: #666; line-height: 1.8; margin-bottom: 16px; font-size: 1.05rem; }
+    .stats-row {
+      display: flex; gap: 32px; margin-top: 28px;
+    }
+    .stat-item { text-align: center; }
+    .stat-item .num {
+      font-size: 2.2rem; font-weight: 800; font-family: 'Fredoka', sans-serif;
+      background: linear-gradient(135deg, #ff6b6b, #f0a500);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .stat-item .label { font-size: 0.85rem; color: #999; font-weight: 600; }
+
+    /* ─── Testimonials ─────────────────────────────── */
+    .testimonials { padding: 100px 0; background: linear-gradient(135deg, #fff5f5, #f0e6ff); }
+    .testimonial-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px;
+    }
+    .testimonial-card {
+      background: #fff; border-radius: 24px; padding: 32px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
+    }
+    .testimonial-card:hover { transform: translateY(-6px); }
+    .testimonial-card .stars { font-size: 1.2rem; margin-bottom: 14px; color: #ffc107; }
+    .testimonial-card .text { color: #666; line-height: 1.7; font-style: italic; margin-bottom: 20px; }
+    .testimonial-card .author {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .testimonial-card .author img {
+      width: 48px; height: 48px; border-radius: 50%; object-fit: cover;
+    }
+    .testimonial-card .author .name { font-weight: 700; color: #333; }
+    .testimonial-card .author .pet { font-size: 0.85rem; color: #999; }
+
+    /* ─── Contact ───────────────────────────────────── */
+    .contact {
+      padding: 100px 0;
+      background: linear-gradient(160deg, #1a1a2e, #16213e, #0f3460);
+      color: #fff;
+    }
+    .contact .section-title {
+      background: linear-gradient(135deg, #ffd700, #ff6b6b, #e05dbc);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .contact .section-subtitle { color: rgba(255,255,255,0.6); }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+    }
+    .contact-info-list { list-style: none; display: flex; flex-direction: column; gap: 24px; }
+    .contact-info-list li {
+      display: flex; gap: 16px; align-items: flex-start;
+    }
+    .contact-info-list .icon-box {
+      width: 52px; height: 52px; border-radius: 18px;
+      background: linear-gradient(135deg, #ff6b6b, #f0a500);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; flex-shrink: 0;
+    }
+    .contact-info-list .info h4 { font-size: 1rem; margin-bottom: 4px; }
+    .contact-info-list .info p { color: rgba(255,255,255,0.6); font-size: 0.95rem; }
+    .contact-form {
+      display: flex; flex-direction: column; gap: 18px;
+    }
+    .contact-form input, .contact-form textarea {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px; padding: 16px 20px;
+      color: #fff; font-size: 1rem;
+      font-family: 'Nunito', sans-serif;
+      transition: border-color 0.3s;
+    }
+    .contact-form input::placeholder, .contact-form textarea::placeholder {
+      color: rgba(255,255,255,0.4);
+    }
+    .contact-form input:focus, .contact-form textarea:focus {
+      outline: none; border-color: #ff6b6b;
+    }
+    .contact-form textarea { resize: vertical; min-height: 120px; }
+    .contact-form .btn-primary { align-self: flex-start; }
+
+    /* ─── Footer ────────────────────────────────────── */
+    footer {
+      background: #0d0d1a; padding: 40px 0 24px; text-align: center; color: rgba(255,255,255,0.4);
+    }
+    footer .social-links { margin-bottom: 16px; display: flex; justify-content: center; gap: 16px; }
+    footer .social-links a {
+      width: 44px; height: 44px; border-radius: 16px;
+      background: rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; transition: background 0.3s, transform 0.3s;
+    }
+    footer .social-links a:hover { background: #ff6b6b; transform: scale(1.15); }
+
+
+
+
+
+    /* ─── Scroll Animations ────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── Pet Sound Button ─────────────────────────── */
+    .sound-fab {
+      position: fixed; bottom: 28px; right: 28px; z-index: 999;
+      width: 60px; height: 60px; border-radius: 50%;
+      background: linear-gradient(135deg, #ff6b6b, #f0a500);
+      border: none; cursor: pointer; font-size: 1.8rem;
+      box-shadow: 0 8px 30px rgba(255,107,107,0.4);
+      transition: transform 0.3s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .sound-fab:hover { transform: scale(1.15) rotate(10deg); }
+
+    /* ─── WhatsApp Float ───────────────────────────── */
+    .whatsapp-fab {
+      position: fixed; bottom: 100px; right: 28px; z-index: 999;
+      width: 60px; height: 60px; border-radius: 50%;
+      background: #25d366; border: none; cursor: pointer;
+      font-size: 1.8rem; color: #fff;
+      box-shadow: 0 8px 30px rgba(37,211,102,0.4);
+      transition: transform 0.3s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .whatsapp-fab:hover { transform: scale(1.15); }
+
+    /* ─── Back to Top ──────────────────────────────── */
+    .back-to-top {
+      position: fixed; bottom: 28px; left: 28px; z-index: 999;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: #333; color: #fff; border: none; cursor: pointer;
+      font-size: 1.2rem; opacity: 0; pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .back-to-top.show { opacity: 1; pointer-events: auto; }
+    .back-to-top:hover { transform: translateY(-4px); background: #ff6b6b; }
+
+    /* ─── Cart Counter ─────────────────────────────── */
+    .cart-counter {
+      position: fixed; top: 80px; right: 28px; z-index: 999;
+      background: #fff; border-radius: 20px; padding: 12px 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      font-weight: 700; display: flex; align-items: center; gap: 8px;
+      opacity: 0; transform: translateY(-20px);
+      transition: all 0.3s;
+    }
+    .cart-counter.show { opacity: 1; transform: translateY(0); }
+
+    /* ─── Modal ─────────────────────────────────────── */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px); z-index: 10000;
+      display: none; align-items: center; justify-content: center;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: #fff; border-radius: 28px; padding: 40px; max-width: 480px; width: 90%;
+      text-align: center; position: relative;
+      animation: fadeUp 0.4s ease;
+    }
+    .modal h3 { font-size: 1.6rem; margin-bottom: 12px; color: #2d2d2d; }
+    .modal p { color: #777; margin-bottom: 24px; }
+    .modal .close-modal {
+      position: absolute; top: 16px; right: 16px;
+      background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #aaa;
+    }
+
+    /* ─── Dark Mode Toggle ─────────────────────────── */
+    .dark-toggle {
+      cursor: pointer; font-size: 1.3rem; background: none; border: none;
+      padding: 6px; transition: transform 0.3s;
+    }
+    .dark-toggle:hover { transform: rotate(30deg); }
+    body.dark-mode { background: #121212; color: #e0e0e0; }
+    body.dark-mode .navbar { background: rgba(18,18,18,0.95); }
+    body.dark-mode .nav-links a { color: #ccc; }
+    body.dark-mode .service-card { background: #1e1e1e; border-color: #333; }
+    body.dark-mode .service-card h3 { color: #eee; }
+    body.dark-mode .product-card { background: #1e1e1e; }
+    body.dark-mode .product-info h4 { color: #eee; }
+    body.dark-mode .testimonial-card { background: #1e1e1e; }
+    body.dark-mode .testimonial-card .text { color: #bbb; }
+    body.dark-mode .about { background: #181818; }
+    body.dark-mode .about-content p { color: #bbb; }
+    body.dark-mode .products { background: linear-gradient(180deg, #1a1a1a, #1e1e1e); }
+    body.dark-mode .services { background: #181818; }
+
+    /* ─── Responsive ───────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero .container { grid-template-columns: 1fr; text-align: center; }
+      .hero-text h1 { font-size: 2.4rem; }
+      .hero-btns { justify-content: center; }
+      .hero-image { order: -1; max-width: 400px; margin: 0 auto; }
+      .hero-badge { display: none; }
+      .wash-grid, .doctor-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .nav-links.open {
+        display: flex; flex-direction: column; position: absolute;
+        top: 72px; left: 0; width: 100%; background: #fff;
+        padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        gap: 16px;
+      }
+      .section-title { font-size: 2rem; }
+    }
+    @media (max-width: 600px) {
+      .hero-text h1 { font-size: 1.9rem; }
+      .stats-row { flex-direction: column; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- ─── Navbar ─────────────────────── -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="#" class="logo">🐾 Vaahis <span>Pet World</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#pet-wash">Pet Wash</a></li>
+        <li><a href="#pet-doctor">Pet Doctor</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><button class="dark-toggle" onclick="toggleDark()" title="Toggle Dark Mode">🌙</button></li>
+        <li><a href="tel:+917799082229" class="nav-cta">📞 Call Now</a></li>
+      </ul>
+      <div class="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ─── Hero ───────────────────────── -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-shapes">
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+    </div>
+    <div class="container">
+      <div class="hero-text">
+        <h1>Healthy, Happy Pets —<br/><span class="highlight">Nurturing Love & Joy</span></h1>
+        <p>Welcome to Vaahis Pet World — your one-stop destination for premium pet food, grooming, vet care, and all the love your furry friends deserve. 🐶🐱🐦🐠</p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="smoothScrollTo('#products')">🛒 Shop Now</button>
+          <button class="btn-secondary" onclick="smoothScrollTo('#pet-doctor')">🩺 Book Vet Visit</button>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="https://cdn.pixabay.com/photo/2023/08/18/15/02/dog-8198719_640.jpg" alt="Happy golden dog" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27600%27 height=%27500%27 fill=%27%23ffe0c0%27%3E%3Crect width=%27600%27 height=%27500%27/%3E%3Ctext x=%27300%27 y=%27250%27 text-anchor=%27middle%27 font-size=%2780%27%3E%F0%9F%90%B6%3C/text%3E%3C/svg%3E'" />
+        <div class="hero-badge b1"><span class="emoji">🐕</span> 500+ Products</div>
+        <div class="hero-badge b2"><span class="emoji">⭐</span> 4.9 Rating</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Services ───────────────────── -->
+  <section class="services" id="services">
+    <div class="container">
+      <h2 class="section-title reveal">What We Offer</h2>
+      <p class="section-subtitle reveal">Everything your pet needs under one roof — from nutrition to grooming to healthcare!</p>
+      <div class="services-grid">
+        <div class="service-card reveal" style="--card-accent:#ff6b6b;--card-accent2:#ff9a9e">
+          <div class="icon">🍖</div>
+          <h3>Premium Pet Food</h3>
+          <p>Curated range of Pedigree, Royal Canin, and more — dry kibble, wet food, treats, biscuits for dogs, cats, birds & fish.</p>
+        </div>
+        <div class="service-card reveal" style="--card-accent:#48c774;--card-accent2:#6dd5ed">
+          <div class="icon">🛁</div>
+          <h3>Pet Wash & Grooming</h3>
+          <p>Professional bathing, grooming, nail trimming, and de-shedding services to keep your pet looking and feeling amazing.</p>
+        </div>
+        <div class="service-card reveal" style="--card-accent:#667eea;--card-accent2:#764ba2">
+          <div class="icon">🩺</div>
+          <h3>Veterinary Care</h3>
+          <p>Experienced vet available Mon-Sat, 11:30 AM–8:30 PM. Routine check-ups, vaccinations, and emergency care for all pets.</p>
+        </div>
+        <div class="service-card reveal" style="--card-accent:#f0a500;--card-accent2:#ff6b6b">
+          <div class="icon">🎾</div>
+          <h3>Toys & Accessories</h3>
+          <p>Wide collection of toys, leashes, collars, beds, and accessories to keep your pet entertained and comfortable.</p>
+        </div>
+        <div class="service-card reveal" style="--card-accent:#e05dbc;--card-accent2:#f093fb">
+          <div class="icon">🐣</div>
+          <h3>All Kinds of Pets</h3>
+          <p>Dogs, cats, birds, fish, hamsters, rabbits — pre-order your dream pet and we'll help you find the perfect companion.</p>
+        </div>
+        <div class="service-card reveal" style="--card-accent:#00bcd4;--card-accent2:#4caf50">
+          <div class="icon">🚚</div>
+          <h3>Home Delivery</h3>
+          <p>Get pet food and supplies delivered to your doorstep. Convenient ordering via call or WhatsApp.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Products ───────────────────── -->
+  <section class="products" id="products">
+    <div class="container">
+      <h2 class="section-title reveal">Our Best-Selling Products</h2>
+      <p class="section-subtitle reveal">Top-quality nutrition brands trusted by pet parents across India</p>
+      <div class="filter-tabs reveal">
+        <button class="filter-tab active" data-filter="all">All</button>
+        <button class="filter-tab" data-filter="pedigree">Pedigree</button>
+        <button class="filter-tab" data-filter="royal-canin">Royal Canin</button>
+        <button class="filter-tab" data-filter="treats">Treats & Snacks</button>
+        <button class="filter-tab" data-filter="wet-food">Wet Food</button>
+        <button class="filter-tab" data-filter="cat">Cat Food</button>
+      </div>
+      <div class="products-grid" id="productsGrid">
+        <!-- Products injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Pet Quiz ───────────────────── -->
+  <section class="quiz-section" id="quiz">
+    <div class="container">
+      <h2 class="section-title reveal">🐾 What's Your Perfect Pet?</h2>
+      <p class="section-subtitle reveal">Take our fun quiz to discover which pet matches your lifestyle!</p>
+      <div class="quiz-box reveal" id="quizBox">
+        <div class="quiz-question" id="quizQuestion"></div>
+        <div class="quiz-options" id="quizOptions"></div>
+        <div class="quiz-result" id="quizResult"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Pet Wash ───────────────────── -->
+  <section class="pet-wash" id="pet-wash">
+    <div class="container">
+      <div class="wash-grid">
+        <div class="wash-image reveal">
+          <img src="https://cdn.pixabay.com/photo/2021/12/26/11/50/dog-6894414_640.jpg" alt="Dog getting groomed" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27600%27 height=%27450%27 fill=%27%23e0f7fa%27%3E%3Crect width=%27600%27 height=%27450%27/%3E%3Ctext x=%27300%27 y=%27225%27 text-anchor=%27middle%27 font-size=%2780%27%3E%F0%9F%9B%81%3C/text%3E%3C/svg%3E'" />
+        </div>
+        <div class="wash-content reveal">
+          <h2>Pamper Your Pet 🛁</h2>
+          <p>Our professional pet wash services ensure your furry friends stay clean, fresh, and fabulous! We use pet-safe shampoos and gentle handling techniques.</p>
+          <ul class="wash-features">
+            <li>Full body bath with premium shampoo</li>
+            <li>Brushing, de-shedding & blow-dry</li>
+            <li>Nail trimming & ear cleaning</li>
+            <li>Flea & tick treatment available</li>
+            <li>Calm, stress-free environment</li>
+          </ul>
+          <button class="btn-primary" onclick="window.open('tel:+917799082229')">📞 Book a Wash</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Pet Doctor ─────────────────── -->
+  <section class="pet-doctor" id="pet-doctor">
+    <div class="container">
+      <div class="doctor-grid">
+        <div class="doctor-content reveal">
+          <h2>Expert Vet Care 🩺</h2>
+          <p>Your pet's health is our top priority. Our compassionate Pet Doctor provides comprehensive veterinary care — from routine check-ups and vaccinations to specialized treatments and emergency care.</p>
+          <p>We work closely with pet parents to ensure early diagnosis, gentle handling, and long-term wellness for your beloved companions.</p>
+          <div class="doctor-schedule">
+            <div class="schedule-item">
+              <span class="emoji">🕐</span>
+              <div class="info">11:30 AM – 8:30 PM<small>Available Timings</small></div>
+            </div>
+            <div class="schedule-item">
+              <span class="emoji">📅</span>
+              <div class="info">Monday – Saturday<small>Working Days</small></div>
+            </div>
+          </div>
+          <br/>
+          <button class="btn-primary" onclick="window.open('tel:+917799082229')">📞 Book Appointment</button>
+        </div>
+        <div class="doctor-image reveal">
+          <img src="https://cdn.pixabay.com/photo/2021/10/19/10/56/cat-6723256_640.jpg" alt="Vet examining a pet" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27600%27 height=%27450%27 fill=%27%23e8f5e9%27%3E%3Crect width=%27600%27 height=%27450%27/%3E%3Ctext x=%27300%27 y=%27225%27 text-anchor=%27middle%27 font-size=%2780%27%3E%F0%9F%A9%BA%3C/text%3E%3C/svg%3E'" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── About ──────────────────────── -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image reveal">
+          <img src="https://cdn.pixabay.com/photo/2019/08/19/07/45/dog-4415649_640.jpg" alt="Happy pets together" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27600%27 height=%27450%27 fill=%27%23fff5e8%27%3E%3Crect width=%27600%27 height=%27450%27/%3E%3Ctext x=%27300%27 y=%27225%27 text-anchor=%27middle%27 font-size=%2780%27%3E%F0%9F%90%BE%3C/text%3E%3C/svg%3E'" />
+        </div>
+        <div class="about-content reveal">
+          <h2>About Vaahis Pet World</h2>
+          <p>Founded with a deep love for animals and a commitment to their well-being, Vaahis Pet World is your one-stop destination for everything your pet needs.</p>
+          <p>We offer premium pet food, grooming products, toys, accessories, and health supplies. Whether you have a loyal dog, a curious cat, a playful bird, or a charming aquarium buddy — we cater to all pets with care and love.</p>
+          <p><strong>We believe pets are family.</strong> Our mission is to create a community where pet lovers feel supported, informed, and inspired.</p>
+          <div class="stats-row">
+            <div class="stat-item"><div class="num" data-target="500">0</div><div class="label">Products</div></div>
+            <div class="stat-item"><div class="num" data-target="1200">0</div><div class="label">Happy Pets</div></div>
+            <div class="stat-item"><div class="num" data-target="98">0</div><div class="label">% Satisfaction</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Testimonials ───────────────── -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <h2 class="section-title reveal">What Pet Parents Say 💬</h2>
+      <p class="section-subtitle reveal">Real stories from our happy pet family</p>
+      <div class="testimonial-grid">
+        <div class="testimonial-card reveal">
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p class="text">"Vaahis Pet World is a blessing! The staff is super knowledgeable and always helps me pick the best food for my Labrador. My dog literally dances when I bring food from here!"</p>
+          <div class="author">
+            <img src="https://cdn.pixabay.com/photo/2018/04/27/03/50/portrait-3353699_640.jpg" alt="Reviewer" style="width:48px;height:48px;object-fit:cover" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2748%27 height=%2748%27 fill=%27%23ffecb3%27%3E%3Crect width=%2748%27 height=%2748%27 rx=%2724%27/%3E%3Ctext x=%2724%27 y=%2732%27 text-anchor=%27middle%27 font-size=%2724%27%3E%F0%9F%91%A4%3C/text%3E%3C/svg%3E'" />
+            <div><div class="name">Rajesh K.</div><div class="pet">🐕 Lab parent</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p class="text">"The grooming service is fantastic. My Persian cat comes home looking like a supermodel! Plus, the vet is very gentle and patient. Highly recommended for all pet owners!"</p>
+          <div class="author">
+            <img src="https://cdn.pixabay.com/photo/2021/06/11/12/26/woman-6328478_640.jpg" alt="Reviewer" style="width:48px;height:48px;object-fit:cover" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2748%27 height=%2748%27 fill=%27%23f8bbd0%27%3E%3Crect width=%2748%27 height=%2748%27 rx=%2724%27/%3E%3Ctext x=%2724%27 y=%2732%27 text-anchor=%27middle%27 font-size=%2724%27%3E%F0%9F%91%A4%3C/text%3E%3C/svg%3E'" />
+            <div><div class="name">Priya S.</div><div class="pet">🐱 Persian cat mom</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p class="text">"Best pet shop in town! They have everything from Royal Canin to treats and toys. The prices are very reasonable compared to online stores. My GSD loves their treats!"</p>
+          <div class="author">
+            <img src="https://cdn.pixabay.com/photo/2020/06/20/07/32/man-5319989_640.jpg" alt="Reviewer" style="width:48px;height:48px;object-fit:cover" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2748%27 height=%2748%27 fill=%27%23c8e6c9%27%3E%3Crect width=%2748%27 height=%2748%27 rx=%2724%27/%3E%3Ctext x=%2724%27 y=%2732%27 text-anchor=%27middle%27 font-size=%2724%27%3E%F0%9F%91%A4%3C/text%3E%3C/svg%3E'" />
+            <div><div class="name">Vikram R.</div><div class="pet">🐕 GSD parent</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Contact ────────────────────── -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2 class="section-title reveal">Get In Touch 📬</h2>
+      <p class="section-subtitle reveal">We'd love to hear from you! Reach out for orders, queries, or just to say hi.</p>
+      <div class="contact-grid">
+        <ul class="contact-info-list reveal">
+          <li>
+            <div class="icon-box">📞</div>
+            <div class="info"><h4>Phone</h4><p><a href="tel:+917799082229" style="color:rgba(255,255,255,0.8)">+91 7799082229</a></p></div>
+          </li>
+          <li>
+            <div class="icon-box">✉️</div>
+            <div class="info"><h4>Email</h4><p><a href="mailto:vaahispetworld@gmail.com" style="color:rgba(255,255,255,0.8)">vaahispetworld@gmail.com</a></p></div>
+          </li>
+          <li>
+            <div class="icon-box">💬</div>
+            <div class="info"><h4>WhatsApp</h4><p><a href="https://wa.me/917799082229" style="color:rgba(255,255,255,0.8)">Chat with us on WhatsApp</a></p></div>
+          </li>
+          <li>
+            <div class="icon-box">🕐</div>
+            <div class="info"><h4>Working Hours</h4><p>Mon – Sat: 11:30 AM – 8:30 PM</p></div>
+          </li>
+        </ul>
+        <form class="contact-form reveal" onsubmit="handleContactForm(event)">
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Your Email" required />
+          <input type="text" placeholder="Your Pet's Name 🐾" />
+          <textarea placeholder="Your Message..." required></textarea>
+          <button type="submit" class="btn-primary">Send Message 🚀</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Floating Buttons ───────────── -->
+  <button class="sound-fab" onclick="playPetSound()" title="Hear a pet sound!">🐾</button>
+  <a href="https://wa.me/917799082229" class="whatsapp-fab" title="Chat on WhatsApp">💬</a>
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆</button>
+
+  <!-- ─── Cart Counter ───────────────── -->
+  <div class="cart-counter" id="cartCounter">🛒 <span id="cartCount">0</span> items</div>
+
+  <!-- ─── Modal ──────────────────────── -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <button class="close-modal" onclick="closeModal()">&times;</button>
+      <h3 id="modalTitle">Added to Cart!</h3>
+      <p id="modalBody">Your item has been added. Call us to place your order!</p>
+      <button class="btn-primary" onclick="closeModal()">Got it! 🎉</button>
+    </div>
+  </div>
+
+  <script>
+    /* ─── Product Data ──────────────────────────────── */
+    const products = [
+      { name: "Pedigree Chicken & Milk (Puppy)", brand: "Pedigree", qty: "1 KG", price: 290, cat: "pedigree", badge: "Best Seller", img: "https://vaahispetworld.com/wp-content/uploads/2025/06/3_5_b9e13ab8-b69a-4e29-9dfc-f10f.png" },
+      { name: "Pedigree Chicken & Veg (Adult)", brand: "Pedigree", qty: "2.8 KG", price: 655, cat: "pedigree", badge: "", img: "https://vaahispetworld.com/wp-content/uploads/2025/06/original-imaha8f7zyqzxvad.png" },
+      { name: "Pedigree Meat & Rice", brand: "Pedigree", qty: "10 KG", price: 2390, cat: "pedigree", badge: "Value Pack", img: "https://vaahispetworld.com/wp-content/uploads/2025/06/53b6b9b8-1383-40ef-94c5-2bcb8e74.png" },
+      { name: "Pedigree 100% Veg", brand: "Pedigree", qty: "3 KG", price: 850, cat: "pedigree", badge: "Veg", img: "https://vaahispetworld.com/wp-content/uploads/2025/06/61Sv3UKt17L.png" },
+      { name: "Royal Canin Mini Puppy", brand: "Royal Canin", qty: "2 KG", price: 2270, cat: "royal-canin", badge: "Premium", img: "https://vaahispetworld.com/wp-content/uploads/2025/06/3182550792929_01.png" },
+      { name: "Royal Canin Maxi Adult", brand: "Royal Canin", qty: "4 KG", price: 3400, cat: "royal-canin", badge: "", img: "https://vaahispetworld.com/wp-content/uploads/2025/06/Royal-Canin-Maxi-Adult_-4-kg-Ama.png" },
+      { name: "Royal Canin German Shepherd Puppy", brand: "Royal Canin", qty: "3 KG", price: 3150, cat: "royal-canin", badge: "Breed Specific", img: "https://vaahispetworld.com/wp-content/uploads/2025/06/71fUvlXno5L.png" },
+      { name: "Royal Canin Labrador Adult", brand: "Royal Canin", qty: "3 KG", price: 2950, cat: "royal-canin", badge: "", img: "https://vaahispetworld.com/wp-content/uploads/2025/06/1-dog-3182550751247-royal-canin.png" },
+      { name: "Royal Canin Persian Kitten", brand: "Royal Canin", qty: "2 KG", price: 2810, cat: "cat", badge: "For Cats", img: "https://vaahispetworld.com/wp-content/uploads/2025/06/61M1f0kh9PL.png" },
+      { name: "Royal Canin FIT 32 (Adult Cat)", brand: "Royal Canin", qty: "2 KG", price: 1700, cat: "cat", badge: "", img: "https://vaahispetworld.com/wp-content/uploads/2025/06/61Slhq-RmqL.png" },
+      { name: "Pedigree DentaStix (Medium)", brand: "Pedigree", qty: "180 G", price: 210, cat: "treats", badge: "Dental Care", img: "https://vaahispetworld.com/wp-content/uploads/2025/06/40075152_17-pedigree-dentastix-d.png" },
+      { name: "Pedigree Meat Jerky \u2013 Bacon", brand: "Pedigree", qty: "60 G", price: 150, cat: "treats", badge: "Tasty", img: "https://vaahispetworld.com/wp-content/uploads/2025/06/61rTltaKB-L._UF10001000_QL80.png" },
+      { name: "Pedigree Ranchos Spiral Wrap", brand: "Pedigree", qty: "60 G", price: 250, cat: "treats", badge: "", img: "https://vaahispetworld.com/wp-content/uploads/2025/06/40249882_1-pedigree-ranchos-spir.png" },
+      { name: "Pedigree Biscuits Chicken & Milk", brand: "Pedigree", qty: "900 G", price: 330, cat: "treats", badge: "Popular", img: "https://vaahispetworld.com/wp-content/uploads/2025/06/ysfnajghpqqv7u1zerzm.png" },
+      { name: "Pedigree Puppy Gravy (Chi & Milk)", brand: "Pedigree", qty: "70 G", price: 50, cat: "wet-food", badge: "Wet Food", img: "https://vaahispetworld.com/wp-content/uploads/2025/06/Pedigree-Puppy-Wet-Dog-Food-with.png" },
+      { name: "RC Puppy Maxi Gravy", brand: "Royal Canin", qty: "85 G", price: 170, cat: "wet-food", badge: "", img: "https://vaahispetworld.com/wp-content/uploads/2025/06/Frame12313_4c8f3ef3-d21a-4175-a1.png" },
+      { name: "RC Kitten Gravy Pouch", brand: "Royal Canin", qty: "85 G", price: 120, cat: "wet-food", badge: "For Kittens", img: "https://vaahispetworld.com/wp-content/uploads/2025/06/Persian-1_715ee952-8f77-42dc-adc.png" },
+      { name: "Royal Canin Persian Adult (Cat)", brand: "Royal Canin", qty: "4 KG", price: 4570, cat: "cat", badge: "Premium", img: "https://vaahispetworld.com/wp-content/uploads/2025/06/51FHh0QDFZL._UF10001000_QL80.png" },
+    ];
+
+    let cartCount = 0;
+    const wishlisted = new Set();
+
+    /* ─── Render Products ──────────────────────────── */
+    function renderProducts(filter = 'all') {
+      const grid = document.getElementById('productsGrid');
+      const filtered = filter === 'all' ? products : products.filter(p => p.cat === filter);
+      grid.innerHTML = filtered.map((p, i) => `
+        <div class="product-card reveal visible" style="animation-delay:${i * 0.05}s">
+          ${p.badge ? `<span class="badge-tag">${p.badge}</span>` : ''}
+          <button class="wishlist-btn ${wishlisted.has(p.name) ? 'liked' : ''}" onclick="toggleWishlist('${p.name.replace(/'/g,"\\'")}', this)">
+            ${wishlisted.has(p.name) ? '❤️' : '🤍'}
+          </button>
+          <div class="product-img"><img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.onerror=null;this.style.display='none';this.parentElement.innerHTML='<div style=\\'display:flex;align-items:center;justify-content:center;height:100%;font-size:4rem;opacity:0.3\\'>🐾</div>'" /></div>
+          <div class="product-info">
+            <div class="brand">${p.brand}</div>
+            <h4>${p.name}</h4>
+            <div class="qty">Qty: ${p.qty}</div>
+            <div class="price-row">
+              <span class="price">₹${p.price.toLocaleString()}/-</span>
+              <button class="add-cart" onclick="addToCart('${p.name.replace(/'/g,"\\'")}')">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    /* ─── Filter Tabs ──────────────────────────────── */
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        renderProducts(tab.dataset.filter);
+      });
+    });
+
+    /* ─── Cart ─────────────────────────────────────── */
+    function addToCart(name) {
+      cartCount++;
+      document.getElementById('cartCount').textContent = cartCount;
+      const counter = document.getElementById('cartCounter');
+      counter.classList.add('show');
+      showModal('Added to Cart! 🛒', `"${name}" added! Call +91 7799082229 to place your order.`);
+      setTimeout(() => counter.classList.remove('show'), 3000);
+    }
+
+    /* ─── Wishlist ──────────────────────────────────── */
+    function toggleWishlist(name, btn) {
+      if (wishlisted.has(name)) {
+        wishlisted.delete(name);
+        btn.classList.remove('liked');
+        btn.innerHTML = '🤍';
+      } else {
+        wishlisted.add(name);
+        btn.classList.add('liked');
+        btn.innerHTML = '❤️';
+        btn.style.transform = 'scale(1.3)';
+        setTimeout(() => btn.style.transform = '', 300);
+      }
+    }
+
+    /* ─── Modal ─────────────────────────────────────── */
+    function showModal(title, body) {
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalBody').textContent = body;
+      document.getElementById('modalOverlay').classList.add('active');
+    }
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
+    }
+
+    /* ─── Quiz ─────────────────────────────────────── */
+    const quizData = [
+      {
+        q: "How active is your lifestyle?",
+        opts: ["🏃 Super active — always outdoors!", "🧘 Moderate — I enjoy both indoors & outdoors", "🛋️ Chill — I'm a homebody", "🎮 Very laid-back — couch is my best friend"],
+        scores: [3, 2, 1, 0]
+      },
+      {
+        q: "How much space do you have at home?",
+        opts: ["🏡 Big house with a yard", "🏢 Apartment with balcony", "🏠 Small flat", "🛏️ Just a single room"],
+        scores: [3, 2, 1, 0]
+      },
+      {
+        q: "How much time can you dedicate daily?",
+        opts: ["⏰ 3+ hours — I'm all in!", "⏰ 1-2 hours", "⏰ 30 mins to 1 hour", "⏰ Less than 30 mins"],
+        scores: [3, 2, 1, 0]
+      }
+    ];
+    const petResults = [
+      { min: 0, max: 3, pet: "🐱 Cat or 🐠 Fish", desc: "A low-maintenance companion like a cat or fish would be perfect for your lifestyle! Cats are independent yet affectionate, and fish bring calm vibes." },
+      { min: 4, max: 6, pet: "🐦 Bird or 🐹 Hamster", desc: "A cheerful bird or a cute hamster would match your medium-energy lifestyle! They're fun, social, and don't need too much space." },
+      { min: 7, max: 9, pet: "🐕 Dog!", desc: "You're perfect for a dog! Your active lifestyle and available time mean a dog would thrive with you. Consider a Labrador, Golden Retriever, or German Shepherd!" }
+    ];
+    let quizStep = 0, quizScore = 0;
+
+    function renderQuiz() {
+      if (quizStep >= quizData.length) {
+        const result = petResults.find(r => quizScore >= r.min && quizScore <= r.max);
+        document.getElementById('quizQuestion').textContent = "Your Perfect Pet Is...";
+        document.getElementById('quizOptions').innerHTML = '';
+        const el = document.getElementById('quizResult');
+        el.innerHTML = `<div style="font-size:2rem;margin-bottom:12px">${result.pet}</div>${result.desc}<br/><br/><button class="btn-primary" onclick="resetQuiz()" style="background:linear-gradient(135deg,#ffd700,#ff6b6b)">Retake Quiz 🔄</button>`;
+        el.classList.add('show');
+        return;
+      }
+      const q = quizData[quizStep];
+      document.getElementById('quizQuestion').textContent = `${quizStep + 1}/${quizData.length}: ${q.q}`;
+      document.getElementById('quizOptions').innerHTML = q.opts.map((opt, i) =>
+        `<button class="quiz-option" onclick="answerQuiz(${q.scores[i]})">${opt}</button>`
+      ).join('');
+      document.getElementById('quizResult').classList.remove('show');
+    }
+    function answerQuiz(score) {
+      quizScore += score;
+      quizStep++;
+      renderQuiz();
+    }
+    function resetQuiz() {
+      quizStep = 0; quizScore = 0;
+      renderQuiz();
+    }
+
+    /* ─── Pet Sound Effect ─────────────────────────── */
+    function playPetSound() {
+      const sounds = ['🐶 Woof!', '🐱 Meow!', '🐦 Tweet!', '🐹 Squeak!', '🐟 Blub blub!'];
+      const sound = sounds[Math.floor(Math.random() * sounds.length)];
+      showModal('Pet Sound! 🔊', sound);
+    }
+
+    /* ─── Paw Trail on Mouse Move ──────────────────── */
+    let lastPaw = 0;
+    document.addEventListener('mousemove', (e) => {
+      const now = Date.now();
+      if (now - lastPaw < 200) return;
+      lastPaw = now;
+      const paw = document.createElement('div');
+      paw.className = 'paw-trail';
+      paw.textContent = '🐾';
+      paw.style.left = e.pageX + 'px';
+      paw.style.top = e.pageY + 'px';
+      document.body.appendChild(paw);
+      setTimeout(() => paw.remove(), 1200);
+    });
+
+    /* ─── Scroll Reveal ────────────────────────────── */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    function observeReveals() {
+      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    }
+
+    /* ─── Counter Animation ────────────────────────── */
+    function animateCounters() {
+      document.querySelectorAll('.stat-item .num').forEach(num => {
+        const target = +num.dataset.target;
+        const inc = target / 60;
+        let current = 0;
+        const timer = setInterval(() => {
+          current += inc;
+          if (current >= target) { current = target; clearInterval(timer); }
+          num.textContent = Math.floor(current) + (target === 98 ? '%' : '+');
+        }, 25);
+      });
+    }
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { animateCounters(); counterObserver.unobserve(e.target); } });
+    }, { threshold: 0.5 });
+
+    /* ─── Back to Top ──────────────────────────────── */
+    window.addEventListener('scroll', () => {
+      document.getElementById('backToTop').classList.toggle('show', window.scrollY > 600);
+    });
+
+    /* ─── Dark Mode ────────────────────────────────── */
+    function toggleDark() {
+      document.body.classList.toggle('dark-mode');
+      document.querySelector('.dark-toggle').textContent =
+        document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+    }
+
+    /* ─── Contact Form ─────────────────────────────── */
+    function handleContactForm(e) {
+      e.preventDefault();
+      showModal('Message Sent! 🎉', 'Thank you for reaching out! We\'ll get back to you soon. In the meantime, call us at +91 7799082229.');
+      e.target.reset();
+    }
+
+    /* ─── Mobile Menu ──────────────────────────────── */
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+
+    /* ─── Smooth Scroll ────────────────────────────── */
+    function smoothScrollTo(selector) {
+      document.querySelector(selector).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    /* ─── Init ─────────────────────────────────────── */
+    renderProducts();
+    renderQuiz();
+    observeReveals();
+    const statsSection = document.querySelector('.stats-row');
+    if (statsSection) counterObserver.observe(statsSection);
+  </script>
+</body>
+</html>
